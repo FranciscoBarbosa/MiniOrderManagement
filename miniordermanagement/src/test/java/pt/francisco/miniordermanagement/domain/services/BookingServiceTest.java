@@ -7,10 +7,11 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
-import pt.francisco.miniordermanagement.domain.entities.Booking;
-import pt.francisco.miniordermanagement.domain.entities.Order;
-import pt.francisco.miniordermanagement.domain.exceptions.OrderNotFoundException;
-import pt.francisco.miniordermanagement.domain.repositories.OrderRepository;
+import pt.francisco.miniordermanagement.domain.booking.Booking;
+import pt.francisco.miniordermanagement.domain.booking.BookingService;
+import pt.francisco.miniordermanagement.domain.order.Order;
+import pt.francisco.miniordermanagement.domain.order.OrderNotFoundException;
+import pt.francisco.miniordermanagement.domain.order.OrderRepository;
 
 import java.util.UUID;
 

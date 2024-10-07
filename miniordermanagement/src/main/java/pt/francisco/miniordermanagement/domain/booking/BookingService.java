@@ -1,9 +1,9 @@
-package pt.francisco.miniordermanagement.domain.services;
+package pt.francisco.miniordermanagement.domain.booking;
 
 import lombok.RequiredArgsConstructor;
-import pt.francisco.miniordermanagement.domain.entities.Booking;
-import pt.francisco.miniordermanagement.domain.exceptions.OrderNotFoundException;
-import pt.francisco.miniordermanagement.domain.repositories.OrderRepository;
+import pt.francisco.miniordermanagement.domain.booking.Booking;
+import pt.francisco.miniordermanagement.domain.order.OrderNotFoundException;
+import pt.francisco.miniordermanagement.domain.order.OrderRepository;
 
 import java.util.UUID;
 

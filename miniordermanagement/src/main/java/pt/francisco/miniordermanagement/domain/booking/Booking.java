@@ -1,7 +1,7 @@
-package pt.francisco.miniordermanagement.domain.entities;
+package pt.francisco.miniordermanagement.domain.booking;
 
 import lombok.Builder;
-import lombok.Getter;
+import pt.francisco.miniordermanagement.domain.order.Order;
 
 import java.util.UUID;
 

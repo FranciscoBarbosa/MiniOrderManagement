@@ -1,7 +1,6 @@
-package pt.francisco.miniordermanagement.domain.entities;
+package pt.francisco.miniordermanagement.domain.order;
 
 import lombok.Builder;
-import lombok.Getter;
 
 import java.time.LocalDateTime;
 import java.util.List;
