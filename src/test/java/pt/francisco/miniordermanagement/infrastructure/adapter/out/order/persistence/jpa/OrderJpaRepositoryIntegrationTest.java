@@ -3,5 +3,4 @@ package pt.francisco.miniordermanagement.infrastructure.adapter.out.order.persis
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-public class OrderJpaRepositoryIntegrationTest {
-}
+public class OrderJpaRepositoryIntegrationTest {}
