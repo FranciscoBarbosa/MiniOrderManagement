@@ -17,10 +17,9 @@ public class BookingService {
     Order order =
         orderRepository.findOrderByOrderId(orderId).orElseThrow(OrderNotFoundException::new);
     validateOrder(order);
+    // TODO: check if there's a better way to create Booking object
     return new Booking(
-        new OrderBookingNumber(UUID.randomUUID().toString()),
-        LocalDateTime.now(),
-        order); // TODO: check if there's a better way to create Booking object
+        new OrderBookingNumber(UUID.randomUUID().toString()), LocalDateTime.now(), order);
   }
 
   private void validateOrder(Order order) {

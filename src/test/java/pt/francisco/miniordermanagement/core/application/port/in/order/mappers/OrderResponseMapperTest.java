@@ -1,4 +1,4 @@
-package pt.francisco.miniordermanagement.core.application.port.in.mappers;
+package pt.francisco.miniordermanagement.core.application.port.in.order.mappers;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
@@ -9,7 +9,6 @@ import java.util.UUID;
 import org.junit.jupiter.api.Test;
 import pt.francisco.miniordermanagement.core.application.port.in.order.dto.OrderResponseDto;
 import pt.francisco.miniordermanagement.core.application.port.in.order.dto.OrderlineResponseDto;
-import pt.francisco.miniordermanagement.core.application.port.in.order.mappers.OrderResponseMapper;
 import pt.francisco.miniordermanagement.core.domain.order.Order;
 import pt.francisco.miniordermanagement.core.domain.order.Orderline;
 

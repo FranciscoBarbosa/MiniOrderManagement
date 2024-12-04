@@ -25,4 +25,8 @@ public abstract class StringValueObject {
   public int hashCode() {
     return Objects.hashCode(this.value);
   }
+
+  public String toString() {
+    return this.value;
+  }
 }
