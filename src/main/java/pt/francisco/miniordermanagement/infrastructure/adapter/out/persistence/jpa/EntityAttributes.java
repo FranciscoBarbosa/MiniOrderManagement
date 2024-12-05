@@ -1,4 +1,4 @@
-package pt.francisco.miniordermanagement.infrastructure.adapter.out.order.persistence.jpa;
+package pt.francisco.miniordermanagement.infrastructure.adapter.out.persistence.jpa;
 
 import jakarta.persistence.Embeddable;
 import java.time.LocalDateTime;

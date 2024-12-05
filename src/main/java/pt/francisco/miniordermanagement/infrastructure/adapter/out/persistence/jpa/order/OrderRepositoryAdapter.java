@@ -1,9 +1,10 @@
-package pt.francisco.miniordermanagement.infrastructure.adapter.out.order.persistence.jpa.order;
+package pt.francisco.miniordermanagement.infrastructure.adapter.out.persistence.jpa.order;
 
 import java.util.Optional;
 import java.util.UUID;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 import pt.francisco.miniordermanagement.core.domain.order.Order;
 import pt.francisco.miniordermanagement.core.domain.order.OrderRepository;
 
@@ -19,6 +20,7 @@ public class OrderRepositoryAdapter implements OrderRepository {
   }
 
   @Override
+  @Transactional
   public Order save(Order order) {
     return orderEntityMapper.toDomainOrder(
         orderJpaRepository.save(orderEntityMapper.toOrderDbEntity(order)));

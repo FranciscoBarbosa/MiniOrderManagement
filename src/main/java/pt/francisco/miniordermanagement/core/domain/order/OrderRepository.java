@@ -17,5 +17,4 @@ public interface OrderRepository {
   Optional<Order> findOrderByOrderId(UUID orderId);
 
   Order save(Order order);
-
 }

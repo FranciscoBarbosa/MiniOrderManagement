@@ -1,4 +1,4 @@
-package pt.francisco.miniordermanagement.infrastructure.adapter.out.order.persistence.jpa.order;
+package pt.francisco.miniordermanagement.infrastructure.adapter.out.persistence.jpa.order;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Embedded;
@@ -11,7 +11,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import pt.francisco.miniordermanagement.infrastructure.adapter.out.order.persistence.jpa.EntityAttributes;
+import pt.francisco.miniordermanagement.infrastructure.adapter.out.persistence.jpa.EntityAttributes;
 
 @Getter
 @Entity
@@ -22,7 +22,9 @@ public class OrderEntity {
   @Id private String orderId;
   private String customerCode;
   private LocalDateTime orderDate;
+
   @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
   private List<OrderlineEntity> orderLineEntityList;
+
   @Embedded private EntityAttributes entityAttributes;
 }

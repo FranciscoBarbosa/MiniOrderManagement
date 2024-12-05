@@ -21,15 +21,17 @@ public class BookingService {
   }
 
   private Order findOrder(UUID orderId) {
-    Order order = orderRepository.findOrderByOrderId(orderId).orElseThrow(OrderNotFoundException::new);
+    Order order =
+        orderRepository.findOrderByOrderId(orderId).orElseThrow(OrderNotFoundException::new);
     if (order.isBooked()) {
       throw new OrderAlreadyBookedException("Order is already booked.");
     }
     return order;
   }
 
-  private Booking createBooking(Order order){
-    //TODO: this is weird, we are dealing with a transaction here, updating order and after saving in booking repo, we should refactor it with aggregates
+  private Booking createBooking(Order order) {
+    // TODO: this is weird, we are dealing with a transaction here, updating order and after saving
+    // in booking repo, we should refactor it with aggregates
     // and do it in one go (same repository I guess)
     var orderBookingNumber = new OrderBookingNumber(UUID.randomUUID().toString());
     assignBookingToOrder(order, orderBookingNumber);

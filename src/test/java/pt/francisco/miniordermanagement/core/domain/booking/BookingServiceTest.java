@@ -6,7 +6,6 @@ import static org.mockito.Mockito.when;
 
 import java.util.Optional;
 import java.util.UUID;
-
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -35,7 +34,8 @@ class BookingServiceTest {
   void shouldCreateBookingForExistentOrder() {
     Order order = OrderTestData.createDefaultDomainOrder();
     when(orderRepository.findOrderByOrderId(order.getOrderId())).thenReturn(Optional.of(order));
-    when(bookingRepository.save(any(Booking.class))).thenReturn(BookingTestData.createBooking());
+    when(bookingRepository.save(any(Booking.class)))
+        .thenReturn(BookingTestData.createBooking(order));
 
     Booking booking = bookingService.createBookingForOrderWithId(order.getOrderId());
     verify(orderRepository).save(order);
@@ -50,8 +50,9 @@ class BookingServiceTest {
     when(orderRepository.findOrderByOrderId(orderId)).thenReturn(Optional.empty());
 
     Assertions.assertThatThrownBy(
-        () -> {
-          bookingService.createBookingForOrderWithId(orderId);
-        }).isInstanceOf(OrderNotFoundException.class);
+            () -> {
+              bookingService.createBookingForOrderWithId(orderId);
+            })
+        .isInstanceOf(OrderNotFoundException.class);
   }
 }

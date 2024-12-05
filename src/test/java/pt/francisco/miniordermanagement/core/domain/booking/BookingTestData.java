@@ -1,11 +1,14 @@
 package pt.francisco.miniordermanagement.core.domain.booking;
 
-import java.util.UUID;
-
-import static pt.francisco.miniordermanagement.core.domain.order.OrderTestData.createDefaultDomainOrder;
+import java.time.LocalDateTime;
+import pt.francisco.miniordermanagement.core.domain.order.Order;
 
 public class BookingTestData {
-    public static Booking createBooking() {
-        return Booking.builder().orderBookingNumber(new OrderBookingNumber("123")).bookingDate(null).order(createDefaultDomainOrder()).build();
-      }
+  public static Booking createBooking(Order order) {
+    return Booking.builder()
+        .orderBookingNumber(new OrderBookingNumber("123"))
+        .bookingDate(LocalDateTime.of(2022, 12, 2, 1, 2))
+        .order(order)
+        .build();
+  }
 }

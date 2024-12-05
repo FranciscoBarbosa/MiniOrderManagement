@@ -1,4 +1,4 @@
-package pt.francisco.miniordermanagement.infrastructure.adapter.out.order.persistence.jpa.order;
+package pt.francisco.miniordermanagement.infrastructure.adapter.out.persistence.jpa.order;
 
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
