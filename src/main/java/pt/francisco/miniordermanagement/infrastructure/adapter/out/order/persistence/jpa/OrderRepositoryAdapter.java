@@ -4,8 +4,8 @@ import java.util.Optional;
 import java.util.UUID;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
-import pt.francisco.miniordermanagement.core.domain.OrderRepository;
 import pt.francisco.miniordermanagement.core.domain.order.Order;
+import pt.francisco.miniordermanagement.core.domain.order.OrderRepository;
 
 @Component
 @RequiredArgsConstructor

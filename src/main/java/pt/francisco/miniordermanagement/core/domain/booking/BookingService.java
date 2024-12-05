@@ -2,9 +2,9 @@ package pt.francisco.miniordermanagement.core.domain.booking;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
-import pt.francisco.miniordermanagement.core.domain.OrderRepository;
 import pt.francisco.miniordermanagement.core.domain.order.Order;
 import pt.francisco.miniordermanagement.core.domain.order.OrderNotFoundException;
+import pt.francisco.miniordermanagement.core.domain.order.OrderRepository;
 
 public class BookingService {
   private final OrderRepository orderRepository;

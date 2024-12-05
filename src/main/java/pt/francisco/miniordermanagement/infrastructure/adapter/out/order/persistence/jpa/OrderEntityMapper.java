@@ -2,9 +2,11 @@ package pt.francisco.miniordermanagement.infrastructure.adapter.out.order.persis
 
 import java.util.List;
 import java.util.UUID;
+import org.springframework.stereotype.Component;
 import pt.francisco.miniordermanagement.core.domain.order.Order;
 import pt.francisco.miniordermanagement.core.domain.order.Orderline;
 
+@Component
 public class OrderEntityMapper {
 
   public OrderEntity toOrderDbEntity(Order order) {

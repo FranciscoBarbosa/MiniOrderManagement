@@ -1,7 +1,5 @@
 package pt.francisco.miniordermanagement.core.domain.order;
 
-import pt.francisco.miniordermanagement.core.domain.OrderRepository;
-
 public class OrderService {
   private final OrderRepository orderRepository;
 

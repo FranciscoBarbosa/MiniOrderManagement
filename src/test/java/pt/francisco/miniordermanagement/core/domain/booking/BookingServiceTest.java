@@ -11,9 +11,9 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
-import pt.francisco.miniordermanagement.core.domain.OrderRepository;
 import pt.francisco.miniordermanagement.core.domain.order.Order;
 import pt.francisco.miniordermanagement.core.domain.order.OrderNotFoundException;
+import pt.francisco.miniordermanagement.core.domain.order.OrderRepository;
 
 @ExtendWith(MockitoExtension.class)
 class BookingServiceTest {
