@@ -8,20 +8,20 @@ import pt.francisco.miniordermanagement.core.domain.order.Orderline;
 
 public class OrderRequestMapper {
   public Order map(OrderRequestDto orderDto) {
-    List<Orderline> orderlineList = orderDto.orderlineList().stream().map(this::map).toList();
+    List<Orderline> orderlineList = orderDto.getOrderlineList().stream().map(this::map).toList();
     return Order.builder()
-        .orderId(orderDto.orderId())
-        .orderDate(orderDto.orderDate())
-        .customerCode(orderDto.customerCode())
+        .orderId(orderDto.getOrderId())
+        .orderDate(orderDto.getOrderDate())
+        .customerCode(orderDto.getCustomerCode())
         .orderlineList(orderlineList)
         .build();
   }
 
   private Orderline map(OrderlineRequestDto orderlineDto) {
     return Orderline.builder()
-        .price(orderlineDto.price())
-        .productId(orderlineDto.productId())
-        .quantity(orderlineDto.quantity())
+        .price(orderlineDto.getPrice())
+        .productId(orderlineDto.getProductId())
+        .quantity(orderlineDto.getQuantity())
         .build();
   }
 }
