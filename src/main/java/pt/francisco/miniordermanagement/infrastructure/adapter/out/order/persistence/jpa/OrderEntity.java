@@ -1,5 +1,6 @@
 package pt.francisco.miniordermanagement.infrastructure.adapter.out.order.persistence.jpa;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -20,6 +21,7 @@ public class OrderEntity {
   @Id private String orderId;
   private String customerCode;
   private LocalDateTime orderDate;
-  @OneToMany private List<OrderlineEntity> orderLineEntityList;
+  @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+  private List<OrderlineEntity> orderLineEntityList;
   @Embedded private EntityAttributes entityAttributes;
 }
