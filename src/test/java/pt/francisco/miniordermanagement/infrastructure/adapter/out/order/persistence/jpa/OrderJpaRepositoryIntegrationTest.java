@@ -1,18 +1,19 @@
 package pt.francisco.miniordermanagement.infrastructure.adapter.out.order.persistence.jpa;
 
 import org.assertj.core.api.Assertions;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.jdbc.core.JdbcTemplate;
 import pt.francisco.miniordermanagement.core.domain.order.OrderTestData;
+import pt.francisco.miniordermanagement.infrastructure.adapter.out.order.persistence.jpa.order.OrderEntityMapper;
+import pt.francisco.miniordermanagement.infrastructure.adapter.out.order.persistence.jpa.order.OrderJpaRepository;
+import pt.francisco.miniordermanagement.infrastructure.adapter.out.order.persistence.jpa.order.OrderRepositoryAdapter;
 
-import java.util.UUID;
 
 @SpringBootTest
-public class OrderJpaRepositoryIntegrationTest {
+class OrderJpaRepositoryIntegrationTest {
 
     @Autowired
     private OrderJpaRepository orderJpaRepository;

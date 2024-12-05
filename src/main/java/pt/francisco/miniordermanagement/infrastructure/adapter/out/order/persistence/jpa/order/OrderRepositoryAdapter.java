@@ -1,4 +1,4 @@
-package pt.francisco.miniordermanagement.infrastructure.adapter.out.order.persistence.jpa;
+package pt.francisco.miniordermanagement.infrastructure.adapter.out.order.persistence.jpa.order;
 
 import java.util.Optional;
 import java.util.UUID;

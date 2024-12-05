@@ -1,4 +1,4 @@
-package pt.francisco.miniordermanagement.infrastructure.adapter.out.order.persistence.jpa;
+package pt.francisco.miniordermanagement.infrastructure.adapter.out.order.persistence.jpa.order;
 
 import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
@@ -7,6 +7,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import pt.francisco.miniordermanagement.infrastructure.adapter.out.order.persistence.jpa.EntityAttributes;
 
 @Getter
 @Entity
