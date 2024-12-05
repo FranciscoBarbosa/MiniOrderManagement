@@ -10,17 +10,19 @@ import pt.francisco.miniordermanagement.core.domain.order.OrderRepository;
 
 @Component
 @RequiredArgsConstructor
+@Transactional
 public class OrderRepositoryAdapter implements OrderRepository {
   private final OrderJpaRepository orderJpaRepository;
   private final OrderEntityMapper orderEntityMapper;
 
   @Override
   public Optional<Order> findOrderByOrderId(UUID orderId) {
-    return null;
+    return orderJpaRepository
+        .findById(String.valueOf(orderId))
+        .map(orderEntityMapper::toDomainOrder);
   }
 
   @Override
-  @Transactional
   public Order save(Order order) {
     return orderEntityMapper.toDomainOrder(
         orderJpaRepository.save(orderEntityMapper.toOrderDbEntity(order)));

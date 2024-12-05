@@ -37,6 +37,18 @@ class OrderJpaRepositoryIntegrationTest {
 
   @Test
   void shouldFindOrderById() {
-    Assertions.assertThat(1).isEqualTo(2);
+    var order = OrderTestData.createDefaultDomainOrder();
+    orderRepositoryAdapter.save(
+        order); // TODO: replace by a sql script to populate initial data or something similar
+
+    var foundOrder = orderRepositoryAdapter.findOrderByOrderId(order.getOrderId()).get();
+
+    Assertions.assertThat(foundOrder.getOrderId()).isEqualTo(order.getOrderId());
+    Assertions.assertThat(foundOrder.getOrderDate()).isEqualTo(order.getOrderDate());
+    Assertions.assertThat(foundOrder.getOrderlineList().size())
+        .isEqualTo(order.getOrderlineList().size());
+    Assertions.assertThat(foundOrder.getCustomerCode()).isEqualTo(order.getCustomerCode());
+    Assertions.assertThat(foundOrder.getOrderBookingNumber())
+        .isEqualTo(order.getOrderBookingNumber());
   }
 }
