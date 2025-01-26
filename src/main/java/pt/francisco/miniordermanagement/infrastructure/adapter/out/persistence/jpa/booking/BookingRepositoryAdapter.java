@@ -10,12 +10,12 @@ import pt.francisco.miniordermanagement.core.domain.booking.BookingRepository;
 @RequiredArgsConstructor
 @Transactional
 public class BookingRepositoryAdapter implements BookingRepository {
-  private final BookingJpaRepository bookingJpaRepository;
-  private final BookingEntityMapper bookingMapper;
+	private final BookingJpaRepository bookingJpaRepository;
+	private final BookingEntityMapper bookingMapper;
 
-  @Override
-  public Booking save(Booking booking) {
-    return bookingMapper.toDomainEntity(
-        bookingJpaRepository.save(bookingMapper.toDbEntity(booking)));
-  }
+	@Override
+	public Booking save(final Booking booking) {
+		return bookingMapper.toDomainEntity(
+				bookingJpaRepository.save(bookingMapper.toDbEntity(booking)));
+	}
 }

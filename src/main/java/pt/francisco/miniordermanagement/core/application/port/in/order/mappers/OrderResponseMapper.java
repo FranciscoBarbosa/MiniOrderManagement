@@ -8,19 +8,18 @@ import pt.francisco.miniordermanagement.core.domain.order.Orderline;
 
 public class OrderResponseMapper {
 
-  public OrderResponseDto map(Order order) {
-    List<OrderlineResponseDto> orderlineResponseList =
-        order.getOrderlineList().stream().map(this::map).toList();
+	public OrderResponseDto map(final Order order) {
+		List<OrderlineResponseDto> orderlineResponseList = order.getOrderlineList().stream().map(this::map).toList();
 
-    return new OrderResponseDto(
-        order.getOrderId(),
-        order.getCustomerCode(),
-        order.getOrderDate(),
-        orderlineResponseList,
-        order.getOrderBookingNumber());
-  }
+		return new OrderResponseDto(
+				order.getOrderId(),
+				order.getCustomerCode(),
+				order.getOrderDate(),
+				orderlineResponseList,
+				order.getOrderBookingNumber());
+	}
 
-  OrderlineResponseDto map(Orderline orderline) {
-    return new OrderlineResponseDto(orderline.productId(), orderline.quantity(), orderline.price());
-  }
+	OrderlineResponseDto map(final Orderline orderline) {
+		return new OrderlineResponseDto(orderline.productId(), orderline.quantity(), orderline.price());
+	}
 }

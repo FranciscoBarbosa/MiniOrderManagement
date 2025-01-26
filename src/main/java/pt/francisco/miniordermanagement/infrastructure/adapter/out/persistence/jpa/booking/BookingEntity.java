@@ -17,8 +17,11 @@ import pt.francisco.miniordermanagement.infrastructure.adapter.out.persistence.j
 @NoArgsConstructor
 @AllArgsConstructor
 public class BookingEntity {
-  @Id private String orderBookingNumber;
-  private String bookingDate;
-  @OneToOne private OrderEntity order;
-  @Embedded EntityAttributes entityAttributes;
+	@Id
+	private String orderBookingNumber;
+	private String bookingDate;
+	@OneToOne
+	private OrderEntity order;
+	@Embedded
+	private EntityAttributes entityAttributes;
 }

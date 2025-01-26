@@ -14,7 +14,7 @@ import java.util.UUID;
 // logic of the domain of your application, then the port belongs to the domain.
 public interface OrderRepository {
 
-  Optional<Order> findOrderByOrderId(UUID orderId);
+	Optional<Order> findOrderByOrderId(UUID orderId);
 
-  Order save(Order order);
+	Order save(Order order);
 }

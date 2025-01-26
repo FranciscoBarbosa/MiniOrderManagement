@@ -11,13 +11,13 @@ import pt.francisco.miniordermanagement.core.domain.order.OrderService;
 
 @RequiredArgsConstructor
 public class CreateOrderUseCase implements UseCase<OrderRequestDto, OrderResponseDto> {
-  private final OrderRequestMapper orderRequestMapper;
-  private final OrderResponseMapper orderResponseMapper;
-  private final OrderService orderService;
+	private final OrderRequestMapper orderRequestMapper;
+	private final OrderResponseMapper orderResponseMapper;
+	private final OrderService orderService;
 
-  @Override
-  public OrderResponseDto execute(OrderRequestDto orderDto) {
-    Order order = orderRequestMapper.map(orderDto);
-    return orderResponseMapper.map(orderService.createOrder(order));
-  }
+	@Override
+	public OrderResponseDto execute(final OrderRequestDto orderDto) {
+		Order order = orderRequestMapper.map(orderDto);
+		return orderResponseMapper.map(orderService.createOrder(order));
+	}
 }

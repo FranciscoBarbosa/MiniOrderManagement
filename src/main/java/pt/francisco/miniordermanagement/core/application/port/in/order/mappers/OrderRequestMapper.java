@@ -7,21 +7,21 @@ import pt.francisco.miniordermanagement.core.domain.order.Order;
 import pt.francisco.miniordermanagement.core.domain.order.Orderline;
 
 public class OrderRequestMapper {
-  public Order map(OrderRequestDto orderDto) {
-    List<Orderline> orderlineList = orderDto.getOrderlineList().stream().map(this::map).toList();
-    return Order.builder()
-        .orderId(orderDto.getOrderId())
-        .orderDate(orderDto.getOrderDate())
-        .customerCode(orderDto.getCustomerCode())
-        .orderlineList(orderlineList)
-        .build();
-  }
+	public Order map(final OrderRequestDto orderDto) {
+		List<Orderline> orderlineList = orderDto.getOrderlineList().stream().map(this::map).toList();
+		return Order.builder()
+				.orderId(orderDto.getOrderId())
+				.orderDate(orderDto.getOrderDate())
+				.customerCode(orderDto.getCustomerCode())
+				.orderlineList(orderlineList)
+				.build();
+	}
 
-  private Orderline map(OrderlineRequestDto orderlineDto) {
-    return Orderline.builder()
-        .price(orderlineDto.getPrice())
-        .productId(orderlineDto.getProductId())
-        .quantity(orderlineDto.getQuantity())
-        .build();
-  }
+	private Orderline map(final OrderlineRequestDto orderlineDto) {
+		return Orderline.builder()
+				.price(orderlineDto.getPrice())
+				.productId(orderlineDto.getProductId())
+				.quantity(orderlineDto.getQuantity())
+				.build();
+	}
 }

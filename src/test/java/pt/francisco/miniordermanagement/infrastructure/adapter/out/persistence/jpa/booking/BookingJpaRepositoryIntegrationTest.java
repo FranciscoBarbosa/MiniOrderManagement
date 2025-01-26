@@ -13,24 +13,24 @@ import pt.francisco.miniordermanagement.infrastructure.adapter.out.persistence.j
 
 @SpringBootTest
 class BookingJpaRepositoryIntegrationTest {
-  @Autowired private BookingRepositoryAdapter bookingRepositoryAdapter;
-  @Autowired private JdbcTemplate jdbcTemplate;
+	@Autowired
+	private BookingRepositoryAdapter bookingRepositoryAdapter;
+	@Autowired
+	private JdbcTemplate jdbcTemplate;
 
-  @Autowired
-  OrderRepositoryAdapter
-      orderRepositoryAdapter; // TODO: this test should not use this adapter, right?
+	@Autowired
+	OrderRepositoryAdapter orderRepositoryAdapter; // TODO: this test should not use this adapter, right?
 
-  @Test
-  void shouldStoreBooking() {
-    Order order = OrderTestData.createDefaultDomainOrder();
-    orderRepositoryAdapter.save(
-        order); // TODO: replace by a sql script to populate initial data or something similar
-    Booking booking = BookingTestData.createBooking(order);
+	@Test
+	void shouldStoreBooking() {
+		Order order = OrderTestData.createDefaultDomainOrder();
+		orderRepositoryAdapter.save(
+				order); // TODO: replace by a sql script to populate initial data or something similar
+		Booking booking = BookingTestData.createBooking(order);
 
-    bookingRepositoryAdapter.save(booking);
+		bookingRepositoryAdapter.save(booking);
 
-    var numberOfBookingsStored =
-        jdbcTemplate.queryForObject("SELECT COUNT(*) FROM booking_entity", Integer.class);
-    Assertions.assertThat(numberOfBookingsStored).isEqualTo(1);
-  }
+		var numberOfBookingsStored = jdbcTemplate.queryForObject("SELECT COUNT(*) FROM booking_entity", Integer.class);
+		Assertions.assertThat(numberOfBookingsStored).isEqualTo(1);
+	}
 }

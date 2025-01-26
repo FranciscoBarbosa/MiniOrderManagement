@@ -10,11 +10,11 @@ import pt.francisco.miniordermanagement.core.domain.booking.BookingService;
 @RequiredArgsConstructor
 public class CreateBookingUseCase implements UseCase<BookingRequestDto, BookingResponseDto> {
 
-  private final BookingService bookingService;
-  private final BookingResponseMapper bookingResponseMapper;
+	private final BookingService bookingService;
+	private final BookingResponseMapper bookingResponseMapper;
 
-  @Override
-  public BookingResponseDto execute(BookingRequestDto input) {
-    return bookingResponseMapper.map(bookingService.createBookingForOrderWithId(input.orderId()));
-  }
+	@Override
+	public BookingResponseDto execute(final BookingRequestDto input) {
+		return bookingResponseMapper.map(bookingService.createBookingForOrderWithId(input.orderId()));
+	}
 }

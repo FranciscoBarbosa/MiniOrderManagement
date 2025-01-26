@@ -6,6 +6,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 @SpringBootTest
 class MiniordermanagementApplicationTests {
 
-  @Test
-  void contextLoads() {}
+	@Test
+	void contextLoads() {
+	}
 }

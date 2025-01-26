@@ -11,4 +11,9 @@ public record OrderResponseDto(
     String customerCode,
     LocalDateTime orderDate,
     List<OrderlineResponseDto> orderlineList,
-    OrderBookingNumber orderBookingNumber) {}
+    OrderBookingNumber orderBookingNumber) {
+
+    public OrderResponseDto { //compact constructor -> allows us to add extra initialization logic -> only for java records
+        orderlineList = List.copyOf(orderlineList);
+    }
+}

@@ -25,51 +25,51 @@ import pt.francisco.miniordermanagement.core.domain.order.OrderTestData;
 // SpringBootTest is slower, in this case we don't need to start the spring context
 @ExtendWith(MockitoExtension.class)
 class CreateOrderUseCaseTest {
-  private OrderRequestMapper orderRequestMapper;
-  private OrderResponseMapper orderResponseMapper;
-  @Mock private OrderService orderService;
-  private UseCase<OrderRequestDto, OrderResponseDto> createOrderUseCase;
+	private OrderRequestMapper orderRequestMapper;
+	private OrderResponseMapper orderResponseMapper;
+	@Mock
+	private OrderService orderService;
+	private UseCase<OrderRequestDto, OrderResponseDto> createOrderUseCase;
 
-  @BeforeEach
-  void setUp() {
-    orderRequestMapper = new OrderRequestMapper();
-    orderResponseMapper = new OrderResponseMapper();
+	@BeforeEach
+	void setUp() {
+		orderRequestMapper = new OrderRequestMapper();
+		orderResponseMapper = new OrderResponseMapper();
 
-    createOrderUseCase =
-        new CreateOrderUseCase(orderRequestMapper, orderResponseMapper, orderService);
-  }
+		createOrderUseCase = new CreateOrderUseCase(orderRequestMapper, orderResponseMapper, orderService);
+	}
 
-  @Test
-  void shouldCreateOrder() {
-    var orderRequestDto = OrderTestData.createDefaultOrderRequestDto();
-    var domainOrder = OrderTestData.createDefaultDomainOrder();
+	@Test
+	void shouldCreateOrder() {
+		var orderRequestDto = OrderTestData.createDefaultOrderRequestDto();
+		var domainOrder = OrderTestData.createDefaultDomainOrder();
 
-    when(orderService.createOrder(any())).thenReturn(domainOrder);
+		when(orderService.createOrder(any())).thenReturn(domainOrder);
 
-    OrderResponseDto orderResponseDto = createOrderUseCase.execute(orderRequestDto);
+		OrderResponseDto orderResponseDto = createOrderUseCase.execute(orderRequestDto);
 
-    Assertions.assertThat(orderResponseDto.orderId()).isEqualTo(DEFAULT_ORDER_UUID);
-    Assertions.assertThat(orderResponseDto.orderDate())
-        .isEqualTo(LocalDateTime.of(10, 11, 23, 4, 3));
-    Assertions.assertThat(orderResponseDto.customerCode()).isEqualTo("CCODE");
-    Assertions.assertThat(
-            areOrderlinesEqual(
-                orderResponseDto.orderlineList().get(0), orderRequestDto.orderlineList().get(0)))
-        .isTrue();
-    Assertions.assertThat(
-            areOrderlinesEqual(
-                orderResponseDto.orderlineList().get(1), orderRequestDto.orderlineList().get(1)))
-        .isTrue();
-  }
+		Assertions.assertThat(orderResponseDto.orderId()).isEqualTo(DEFAULT_ORDER_UUID);
+		Assertions.assertThat(orderResponseDto.orderDate())
+				.isEqualTo(LocalDateTime.of(10, 11, 23, 4, 3));
+		Assertions.assertThat(orderResponseDto.customerCode()).isEqualTo("CCODE");
+		Assertions.assertThat(
+				areOrderlinesEqual(
+						orderResponseDto.orderlineList().get(0), orderRequestDto.getOrderlineList().get(0)))
+				.isTrue();
+		Assertions.assertThat(
+				areOrderlinesEqual(
+						orderResponseDto.orderlineList().get(1), orderRequestDto.getOrderlineList().get(1)))
+				.isTrue();
+	}
 
-  private boolean areOrderlinesEqual(
-      OrderlineResponseDto orderlineResponseDto, OrderlineRequestDto orderlineRequestDto) {
-    if (!Objects.equals(orderlineRequestDto.price(), orderlineResponseDto.price())) {
-      return false;
-    }
-    if (!Objects.equals(orderlineRequestDto.quantity(), orderlineResponseDto.quantity())) {
-      return false;
-    }
-    return Objects.equals(orderlineRequestDto.productId(), orderlineResponseDto.productId());
-  }
+	private boolean areOrderlinesEqual(
+			OrderlineResponseDto orderlineResponseDto, OrderlineRequestDto orderlineRequestDto) {
+		if (!Objects.equals(orderlineRequestDto.getPrice(), orderlineResponseDto.price())) {
+			return false;
+		}
+		if (!Objects.equals(orderlineRequestDto.getQuantity(), orderlineResponseDto.quantity())) {
+			return false;
+		}
+		return Objects.equals(orderlineRequestDto.getProductId(), orderlineResponseDto.productId());
+	}
 }

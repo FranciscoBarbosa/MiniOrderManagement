@@ -11,26 +11,26 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class AmqpConfiguration {
-  static final String exchangeName = "order-exchange";
-  static final String queueName = "order-queue";
+	static final String EXCHANGE_NAME = "order-exchange";
+	static final String QUEUE_NAME = "order-queue";
 
-  @Bean
-  Queue queue() {
-    return new Queue(queueName, false);
-  }
+	@Bean
+	Queue queue() {
+		return new Queue(QUEUE_NAME, false);
+	}
 
-  @Bean
-  DirectExchange exchange() {
-    return new DirectExchange(exchangeName);
-  }
+	@Bean
+	DirectExchange exchange() {
+		return new DirectExchange(EXCHANGE_NAME);
+	}
 
-  @Bean
-  Binding binding(Queue queue, DirectExchange exchange) {
-    return BindingBuilder.bind(queue).to(exchange).withQueueName();
-  }
+	@Bean
+	Binding binding(final Queue queue, final DirectExchange exchange) {
+		return BindingBuilder.bind(queue).to(exchange).withQueueName();
+	}
 
-  @Bean
-  public MessageConverter jsonMessageConverter() {
-    return new Jackson2JsonMessageConverter();
-  }
+	@Bean
+	public MessageConverter jsonMessageConverter() {
+		return new Jackson2JsonMessageConverter();
+	}
 }

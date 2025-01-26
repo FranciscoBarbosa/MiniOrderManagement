@@ -15,8 +15,10 @@ import pt.francisco.miniordermanagement.infrastructure.adapter.out.persistence.j
 @NoArgsConstructor
 @AllArgsConstructor
 public class OrderlineEntity {
-  @Id private String productId;
-  private int quantity;
-  private double price;
-  @Embedded private EntityAttributes entityAttributes;
+	@Id
+	private String productId;
+	private int quantity;
+	private double price;
+	@Embedded
+	private EntityAttributes entityAttributes;
 }

@@ -13,33 +13,32 @@ import pt.francisco.miniordermanagement.core.domain.order.Order;
 import pt.francisco.miniordermanagement.core.domain.order.Orderline;
 
 class OrderRequestMapperTest {
-  private OrderRequestMapper orderRequestMapper = new OrderRequestMapper();
+	private OrderRequestMapper orderRequestMapper = new OrderRequestMapper();
 
-  @Test
-  void shouldMapFromOrderRequestToDomain() {
-    UUID orderUUID = UUID.randomUUID();
-    var orderlineList =
-        List.of(new OrderlineRequestDto("CLTH2", 10, 5), new OrderlineRequestDto("FTWEAR1", 12, 8));
+	@Test
+	void shouldMapFromOrderRequestToDomain() {
+		UUID orderUUID = UUID.randomUUID();
+		var orderlineList = List.of(new OrderlineRequestDto("CLTH2", 10, 5), new OrderlineRequestDto("FTWEAR1", 12, 8));
 
-    var orderRequestDto =
-        new OrderRequestDto(orderUUID, "CCODE", LocalDateTime.of(10, 12, 21, 4, 4), orderlineList);
+		var orderRequestDto = new OrderRequestDto(orderUUID, "CCODE", LocalDateTime.of(10, 12, 21, 4, 4),
+				orderlineList);
 
-    Order order = orderRequestMapper.map(orderRequestDto);
+		Order order = orderRequestMapper.map(orderRequestDto);
 
-    assertThat(order.getOrderId()).isEqualTo(orderUUID);
-    assertThat(order.getCustomerCode()).isEqualTo("CCODE");
-    assertThat(order.getOrderDate()).isEqualTo(LocalDateTime.of(10, 12, 21, 4, 4));
-    assertThat(areOrderlinesEqual(orderlineList.get(0), order.getOrderlineList().get(0))).isTrue();
-    assertThat(areOrderlinesEqual(orderlineList.get(1), order.getOrderlineList().get(1))).isTrue();
-  }
+		assertThat(order.getOrderId()).isEqualTo(orderUUID);
+		assertThat(order.getCustomerCode()).isEqualTo("CCODE");
+		assertThat(order.getOrderDate()).isEqualTo(LocalDateTime.of(10, 12, 21, 4, 4));
+		assertThat(areOrderlinesEqual(orderlineList.get(0), order.getOrderlineList().get(0))).isTrue();
+		assertThat(areOrderlinesEqual(orderlineList.get(1), order.getOrderlineList().get(1))).isTrue();
+	}
 
-  private boolean areOrderlinesEqual(OrderlineRequestDto orderlineRequestDto, Orderline orderline) {
-    if (!Objects.equals(orderline.price(), orderlineRequestDto.price())) {
-      return false;
-    }
-    if (!Objects.equals(orderline.quantity(), orderlineRequestDto.quantity())) {
-      return false;
-    }
-    return Objects.equals(orderline.productId(), orderlineRequestDto.productId());
-  }
+	private boolean areOrderlinesEqual(OrderlineRequestDto orderlineRequestDto, Orderline orderline) {
+		if (!Objects.equals(orderline.price(), orderlineRequestDto.getPrice())) {
+			return false;
+		}
+		if (!Objects.equals(orderline.quantity(), orderlineRequestDto.getQuantity())) {
+			return false;
+		}
+		return Objects.equals(orderline.productId(), orderlineRequestDto.getProductId());
+	}
 }

@@ -1,3 +1,4 @@
 package pt.francisco.miniordermanagement.core.domain.order;
 
-public class OrderAlreadyExistsException extends RuntimeException {}
+public class OrderAlreadyExistsException extends RuntimeException {
+}

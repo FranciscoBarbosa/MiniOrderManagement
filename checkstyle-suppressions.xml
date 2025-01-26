@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<!DOCTYPE suppressions PUBLIC "-//Puppy Crawl//DTD Suppressions X.X//EN" "https://checkstyle.org/dtds/suppressions_1_1.dtd">
+<suppressions>
+    <suppress files="." checks="JavadocVariable"/>
+    <suppress files="." checks="JavadocMethod"/>
+    <suppress files="." checks="JavadocType"/>
+    <suppress files="." checks="JavadocPackage"/>
+
+    <suppress files="." checks="LineLength"/>
+    <suppress files="." checks="FileTabCharacter"/>
+    <suppress files="." checks="WhitespaceAround" />
+
+    <suppress files="src\\main\\java\\pt\\francisco\\miniordermanagement\\MiniOrderManagementApplication.java" checks="HideUtilityClassConstructor"/>
+
+    <suppress files="." checks="DesignForExtension"/>
+    <suppress files="." checks="TodoComment" />
+    <suppress files="." checks="HiddenField" />
+
+</suppressions>

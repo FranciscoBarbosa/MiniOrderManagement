@@ -7,6 +7,8 @@ import org.springframework.data.annotation.LastModifiedDate;
 
 @Embeddable
 public class EntityAttributes {
-  @CreatedDate private LocalDateTime created;
-  @LastModifiedDate private LocalDateTime modified;
+	@CreatedDate
+	private LocalDateTime created;
+	@LastModifiedDate
+	private LocalDateTime modified;
 }

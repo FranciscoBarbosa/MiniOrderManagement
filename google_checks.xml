@@ -38,14 +38,6 @@
         <property name="optional" value="true"/>
     </module>
 
-    <!-- https://checkstyle.org/filters/suppresswithnearbytextfilter.html -->
-    <module name="SuppressWithNearbyTextFilter">
-        <property name="nearbyTextPattern"
-                  value="CHECKSTYLE.SUPPRESS\: (\w+) for ([+-]\d+) lines"/>
-        <property name="checkPattern" value="$1"/>
-        <property name="lineRange" value="$2"/>
-    </module>
-
     <!-- Checks for whitespace                               -->
     <!-- See http://checkstyle.org/checks/whitespace/index.html -->
     <module name="FileTabCharacter">
@@ -141,7 +133,7 @@
                       value="ASSIGN, BAND, BAND_ASSIGN, BOR, BOR_ASSIGN, BSR, BSR_ASSIGN, BXOR,
                     BXOR_ASSIGN, COLON, DIV, DIV_ASSIGN, DO_WHILE, EQUAL, GE, GT, LAMBDA, LAND,
                     LCURLY, LE, LITERAL_CATCH, LITERAL_DO, LITERAL_ELSE, LITERAL_FINALLY,
-                    LITERAL_FOR, LITERAL_IF, LITERAL_RETURN, LITERAL_SWITCH, LITERAL_SYNCHRONIZED,
+                    LITERAL_FOR, LITERAL_IF, LITERAL_RETURN, LITERAL_SYNCHRONIZED,
                     LITERAL_TRY, LITERAL_WHILE, LOR, LT, MINUS, MINUS_ASSIGN, MOD, MOD_ASSIGN,
                     NOT_EQUAL, PLUS, PLUS_ASSIGN, QUESTION, RCURLY, SL, SLIST, SL_ASSIGN, SR,
                     SR_ASSIGN, STAR, STAR_ASSIGN, LITERAL_ASSERT,
@@ -331,7 +323,7 @@
             <property name="tokens"
                       value="ANNOTATION, ANNOTATION_FIELD_DEF, CTOR_CALL, CTOR_DEF, DOT, ENUM_CONSTANT_DEF,
                     EXPR, LITERAL_CATCH, LITERAL_DO, LITERAL_FOR, LITERAL_IF, LITERAL_NEW,
-                    LITERAL_SWITCH, LITERAL_SYNCHRONIZED, LITERAL_WHILE, METHOD_CALL,
+                  , LITERAL_SYNCHRONIZED, LITERAL_WHILE, METHOD_CALL,
                     METHOD_DEF, QUESTION, RESOURCE_SPECIFICATION, SUPER_CTOR_CALL, LAMBDA,
                     RECORD_DEF, RECORD_PATTERN_DEF"/>
         </module>

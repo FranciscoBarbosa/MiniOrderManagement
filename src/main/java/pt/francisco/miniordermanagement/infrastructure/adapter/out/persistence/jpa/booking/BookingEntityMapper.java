@@ -10,21 +10,21 @@ import pt.francisco.miniordermanagement.infrastructure.adapter.out.persistence.j
 @Component
 @RequiredArgsConstructor
 public class BookingEntityMapper {
-  private final OrderEntityMapper orderEntityMapper;
+	private final OrderEntityMapper orderEntityMapper;
 
-  public BookingEntity toDbEntity(Booking booking) {
-    return BookingEntity.builder()
-        .orderBookingNumber(booking.orderBookingNumber().toString())
-        .bookingDate(booking.bookingDate().toString())
-        .order(orderEntityMapper.toOrderDbEntity(booking.order()))
-        .build();
-  }
+	public BookingEntity toDbEntity(final Booking booking) {
+		return BookingEntity.builder()
+				.orderBookingNumber(booking.orderBookingNumber().toString())
+				.bookingDate(booking.bookingDate().toString())
+				.order(orderEntityMapper.toOrderDbEntity(booking.order()))
+				.build();
+	}
 
-  public Booking toDomainEntity(BookingEntity bookingEntity) {
-    return Booking.builder()
-        .orderBookingNumber(new OrderBookingNumber(bookingEntity.getOrderBookingNumber()))
-        .bookingDate(LocalDateTime.parse(bookingEntity.getBookingDate()))
-        .order(orderEntityMapper.toDomainOrder(bookingEntity.getOrder()))
-        .build();
-  }
+	public Booking toDomainEntity(final BookingEntity bookingEntity) {
+		return Booking.builder()
+				.orderBookingNumber(new OrderBookingNumber(bookingEntity.getOrderBookingNumber()))
+				.bookingDate(LocalDateTime.parse(bookingEntity.getBookingDate()))
+				.order(orderEntityMapper.toDomainOrder(bookingEntity.getOrder()))
+				.build();
+	}
 }

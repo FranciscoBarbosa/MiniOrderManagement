@@ -5,14 +5,14 @@ import pt.francisco.miniordermanagement.core.application.port.in.order.mappers.O
 import pt.francisco.miniordermanagement.core.domain.booking.Booking;
 
 public class BookingResponseMapper {
-  // TODO: is this ok? to use a mapper from a different entity?
-  OrderResponseMapper orderResponseMapper = new OrderResponseMapper();
+	// TODO: is this ok? to use a mapper from a different entity?
+	private final OrderResponseMapper orderResponseMapper = new OrderResponseMapper();
 
-  public BookingResponseDto map(Booking booking) {
+	public BookingResponseDto map(final Booking booking) {
 
-    return new BookingResponseDto(
-        booking.orderBookingNumber(),
-        booking.bookingDate(),
-        booking.order() != null ? orderResponseMapper.map(booking.order()) : null);
-  }
+		return new BookingResponseDto(
+				booking.orderBookingNumber(),
+				booking.bookingDate(),
+				booking.order() != null ? orderResponseMapper.map(booking.order()) : null);
+	}
 }

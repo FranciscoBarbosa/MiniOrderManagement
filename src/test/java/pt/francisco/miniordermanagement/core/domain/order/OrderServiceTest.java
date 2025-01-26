@@ -12,31 +12,32 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 @ExtendWith(MockitoExtension.class)
 class OrderServiceTest {
-  @Mock // TODO: remove mockito from tests to the Core package. Create a test double in the package
-  private OrderRepository orderRepository;
-  private OrderService orderService;
+	@Mock // TODO: remove mockito from tests to the Core package. Create a test double in
+			// the package
+	private OrderRepository orderRepository;
+	private OrderService orderService;
 
-  @BeforeEach
-  void setUp() {
-    orderService = new OrderService(orderRepository);
-  }
+	@BeforeEach
+	void setUp() {
+		orderService = new OrderService(orderRepository);
+	}
 
-  @Test
-  void shouldCreateOrder() {
-    Order order = OrderTestData.createDefaultDomainOrder();
+	@Test
+	void shouldCreateOrder() {
+		Order order = OrderTestData.createDefaultDomainOrder();
 
-    orderService.createOrder(order);
+		orderService.createOrder(order);
 
-    verify(orderRepository).save(order);
-  }
+		verify(orderRepository).save(order);
+	}
 
-  @Test
-  void shouldThrowExceptionWhenCreatingDuplicateOrder() {
-    Order order = OrderTestData.createDefaultDomainOrder();
-    when(orderRepository.findOrderByOrderId(order.getOrderId()))
-        .thenReturn(java.util.Optional.of(order));
+	@Test
+	void shouldThrowExceptionWhenCreatingDuplicateOrder() {
+		Order order = OrderTestData.createDefaultDomainOrder();
+		when(orderRepository.findOrderByOrderId(order.getOrderId()))
+				.thenReturn(java.util.Optional.of(order));
 
-    Assertions.assertThrows(
-        OrderAlreadyExistsException.class, () -> orderService.createOrder(order));
-  }
+		Assertions.assertThrows(
+				OrderAlreadyExistsException.class, () -> orderService.createOrder(order));
+	}
 }

@@ -7,41 +7,41 @@ import pt.francisco.miniordermanagement.core.domain.order.OrderNotFoundException
 import pt.francisco.miniordermanagement.core.domain.order.OrderRepository;
 
 public class BookingService {
-  private final OrderRepository orderRepository;
-  private final BookingRepository bookingRepository;
+	private final OrderRepository orderRepository;
+	private final BookingRepository bookingRepository;
 
-  public BookingService(OrderRepository orderRepository, BookingRepository bookingRepository) {
-    this.orderRepository = orderRepository;
-    this.bookingRepository = bookingRepository;
-  }
+	public BookingService(final OrderRepository orderRepository, final BookingRepository bookingRepository) {
+		this.orderRepository = orderRepository;
+		this.bookingRepository = bookingRepository;
+	}
 
-  public Booking createBookingForOrderWithId(UUID orderId) {
-    Order order = findOrder(orderId);
-    return createBooking(order);
-  }
+	public Booking createBookingForOrderWithId(final UUID orderId) {
+		Order order = findOrder(orderId);
+		return createBooking(order);
+	}
 
-  private Order findOrder(UUID orderId) {
-    Order order =
-        orderRepository.findOrderByOrderId(orderId).orElseThrow(OrderNotFoundException::new);
-    if (order.isBooked()) {
-      throw new OrderAlreadyBookedException("Order is already booked.");
-    }
-    return order;
-  }
+	private Order findOrder(final UUID orderId) {
+		Order order = orderRepository.findOrderByOrderId(orderId).orElseThrow(OrderNotFoundException::new);
+		if (order.isBooked()) {
+			throw new OrderAlreadyBookedException("Order is already booked.");
+		}
+		return order;
+	}
 
-  private Booking createBooking(Order order) {
-    // TODO: this is weird, we are dealing with a transaction here, updating order and after saving
-    // in booking repo, we should refactor it with aggregates
-    // and do it in one go (same repository I guess)
-    var orderBookingNumber = new OrderBookingNumber(UUID.randomUUID().toString());
-    assignBookingToOrder(order, orderBookingNumber);
-    // TODO: check if there's a better way to create Booking object
-    Booking booking = new Booking(orderBookingNumber, LocalDateTime.now(), order);
-    return bookingRepository.save(booking);
-  }
+	private Booking createBooking(final Order order) {
+		// TODO: this is weird, we are dealing with a transaction here, updating order
+		// and after saving
+		// in booking repo, we should refactor it with aggregates
+		// and do it in one go (same repository I guess)
+		var orderBookingNumber = new OrderBookingNumber(UUID.randomUUID().toString());
+		assignBookingToOrder(order, orderBookingNumber);
+		// TODO: check if there's a better way to create Booking object
+		Booking booking = new Booking(orderBookingNumber, LocalDateTime.now(), order);
+		return bookingRepository.save(booking);
+	}
 
-  private void assignBookingToOrder(Order order, OrderBookingNumber orderBookingNumber) {
-    order.setOrderBookingNumber(orderBookingNumber);
-    orderRepository.save(order);
-  }
+	private void assignBookingToOrder(final Order order, final OrderBookingNumber orderBookingNumber) {
+		order.setOrderBookingNumber(orderBookingNumber);
+		orderRepository.save(order);
+	}
 }
