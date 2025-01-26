@@ -3,8 +3,15 @@ spring:
         name: miniordermanagement
 
     datasource:
-        url: jdbc:h2:mem:testdb
+        url: jdbc:h2:file:./data/testdb
         driverClassName: org.h2.Driver
+    jpa:
+        hibernate:
+            ddl-auto: update
+    h2:
+        console:
+            enabled: true
+            path: /h2-console
 
     rabbitmq:
         host: localhost
