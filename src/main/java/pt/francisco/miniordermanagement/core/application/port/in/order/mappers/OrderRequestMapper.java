@@ -8,11 +8,11 @@ import pt.francisco.miniordermanagement.core.domain.order.Orderline;
 
 public class OrderRequestMapper {
 	public Order map(final OrderRequestDto orderDto) {
-		List<Orderline> orderlineList = orderDto.getOrderlineList().stream().map(this::map).toList();
+		List<Orderline> orderlineList = orderDto.orderlineList().stream().map(this::map).toList();
 		return Order.builder()
-				.orderId(orderDto.getOrderId())
-				.orderDate(orderDto.getOrderDate())
-				.customerCode(orderDto.getCustomerCode())
+				.orderId(orderDto.orderId())
+				.orderDate(orderDto.orderDate())
+				.customerCode(orderDto.customerCode())
 				.orderlineList(orderlineList)
 				.build();
 	}

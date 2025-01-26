@@ -54,11 +54,11 @@ class CreateOrderUseCaseTest {
 		Assertions.assertThat(orderResponseDto.customerCode()).isEqualTo("CCODE");
 		Assertions.assertThat(
 				areOrderlinesEqual(
-						orderResponseDto.orderlineList().get(0), orderRequestDto.getOrderlineList().get(0)))
+						orderResponseDto.orderlineList().get(0), orderRequestDto.orderlineList().get(0)))
 				.isTrue();
 		Assertions.assertThat(
 				areOrderlinesEqual(
-						orderResponseDto.orderlineList().get(1), orderRequestDto.getOrderlineList().get(1)))
+						orderResponseDto.orderlineList().get(1), orderRequestDto.orderlineList().get(1)))
 				.isTrue();
 	}
 

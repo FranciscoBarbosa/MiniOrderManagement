@@ -4,24 +4,36 @@ import org.springframework.amqp.core.Binding;
 import org.springframework.amqp.core.BindingBuilder;
 import org.springframework.amqp.core.DirectExchange;
 import org.springframework.amqp.core.Queue;
+import org.springframework.amqp.rabbit.connection.ConnectionFactory;
+import org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer;
 import org.springframework.amqp.support.converter.Jackson2JsonMessageConverter;
 import org.springframework.amqp.support.converter.MessageConverter;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class AmqpConfiguration {
-	static final String EXCHANGE_NAME = "order-exchange";
-	static final String QUEUE_NAME = "order-queue";
+	@Value("${rabbitmq.order.exchange}")
+	private String exchangeName;
+	@Value("${rabbitmq.order.queue}")
+	private String queueName;
+
+	@Bean
+	SimpleMessageListenerContainer container(final ConnectionFactory connectionFactory) {
+		SimpleMessageListenerContainer container = new SimpleMessageListenerContainer();
+		container.setConnectionFactory(connectionFactory);
+		return container;
+	}
 
 	@Bean
 	Queue queue() {
-		return new Queue(QUEUE_NAME, false);
+		return new Queue(queueName, false);
 	}
 
 	@Bean
 	DirectExchange exchange() {
-		return new DirectExchange(EXCHANGE_NAME);
+		return new DirectExchange(exchangeName);
 	}
 
 	@Bean

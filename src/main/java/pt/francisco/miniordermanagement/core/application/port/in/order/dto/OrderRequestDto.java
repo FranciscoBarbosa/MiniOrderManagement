@@ -6,15 +6,9 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 import lombok.Builder;
-import lombok.Getter;
 
-@Getter
-public final class OrderRequestDto {
-	private final UUID orderId;
-	private final String customerCode;
-	private final LocalDateTime orderDate;
-	private final List<OrderlineRequestDto> orderlineList;
-
+public record OrderRequestDto(UUID orderId, String customerCode, LocalDateTime orderDate,
+							  List<OrderlineRequestDto> orderlineList) {
 	@Builder
 	@JsonCreator
 	public OrderRequestDto(
