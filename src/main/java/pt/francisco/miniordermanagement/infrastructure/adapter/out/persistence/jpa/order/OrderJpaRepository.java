@@ -3,7 +3,10 @@ package pt.francisco.miniordermanagement.infrastructure.adapter.out.persistence.
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.Optional;
+
 @Repository
 public interface OrderJpaRepository extends CrudRepository<OrderEntity, String> {
+	Optional<OrderEntity> findById(String id);
 
 }

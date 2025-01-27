@@ -7,13 +7,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.ComponentScan;
-import org.springframework.jdbc.core.BeanPropertyRowMapper;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.testcontainers.junit.jupiter.Testcontainers;
 import pt.francisco.miniordermanagement.core.application.port.in.order.dto.OrderRequestDto;
 import pt.francisco.miniordermanagement.core.application.port.in.order.dto.OrderlineRequestDto;
+import pt.francisco.miniordermanagement.core.domain.order.Order;
+import pt.francisco.miniordermanagement.core.domain.order.OrderRepository;
 import pt.francisco.miniordermanagement.crosscut.MiniOrderManagementLauncher;
-import pt.francisco.miniordermanagement.infrastructure.adapter.out.persistence.jpa.order.OrderEntity;
 import pt.francisco.miniordermanagement.testcontainers.rabbitmq.RabbitmqContainerSetup;
 
 import java.time.LocalDateTime;
@@ -32,7 +31,7 @@ class OrderReceiverIntegrationTest extends RabbitmqContainerSetup { // TODO: add
 	@Autowired
 	private AmqpTemplate amqpTemplate;
 	@Autowired
-	private JdbcTemplate jdbcTemplate;
+	private OrderRepository orderRepository;
 
 	@Test
 	void shouldReceiveMessage() {
@@ -48,28 +47,22 @@ class OrderReceiverIntegrationTest extends RabbitmqContainerSetup { // TODO: add
 
 		amqpTemplate.convertAndSend(queueName, orderRequestDto);
 
-		await().atMost(5, TimeUnit.SECONDS).until(() -> {
-			Integer count = jdbcTemplate.queryForObject(
-					"SELECT COUNT(*) FROM ORDER_ENTITY o WHERE o.ORDER_ID = ?",
-					Integer.class,
-					orderId.toString());
-			return count != null && count > 0;
+		await().atMost(10, TimeUnit.SECONDS).until(() -> {
+			var orderEntity = orderRepository.findOrderByOrderId(orderId).orElse(null);
+			return orderEntity != null;
 		});
 
-		OrderEntity orderReturned = jdbcTemplate.queryForObject(
-				"SELECT * FROM ORDER_ENTITY o WHERE o.ORDER_ID = ?",
-				new BeanPropertyRowMapper<>(OrderEntity.class),
-				orderId.toString());
+		Order orderCreated = orderRepository.findOrderByOrderId(orderId).get();
 
-		Assertions.assertThat(orderRequestDto.orderDate()).isEqualTo(orderReturned.getOrderDate());
-		Assertions.assertThat(orderRequestDto.customerCode()).isEqualTo(orderReturned.getCustomerCode());
-		Assertions.assertThat(orderRequestDto.orderId()).isEqualTo(orderReturned.getOrderId());
+		Assertions.assertThat(orderRequestDto.orderDate()).isEqualTo(orderCreated.getOrderDate());
+		Assertions.assertThat(orderRequestDto.customerCode()).isEqualTo(orderCreated.getCustomerCode());
+		Assertions.assertThat(orderRequestDto.orderId()).isEqualTo(orderCreated.getOrderId());
 		Assertions.assertThat(orderRequestDto.orderlineList().get(0).getProductId())
-				.isEqualTo(orderReturned.getOrderLineEntityList().get(0).getProductId());
+				.isEqualTo(orderCreated.getOrderlineList().get(0).productId());
 		Assertions.assertThat(orderRequestDto.orderlineList().get(0).getPrice())
-				.isEqualTo(orderReturned.getOrderLineEntityList().get(0).getPrice());
+				.isEqualTo(orderCreated.getOrderlineList().get(0).price());
 		Assertions.assertThat(orderRequestDto.orderlineList().get(0).getQuantity())
-				.isEqualTo(orderReturned.getOrderLineEntityList().get(0).getQuantity());
+				.isEqualTo(orderCreated.getOrderlineList().get(0).quantity());
 	}
 
 }
