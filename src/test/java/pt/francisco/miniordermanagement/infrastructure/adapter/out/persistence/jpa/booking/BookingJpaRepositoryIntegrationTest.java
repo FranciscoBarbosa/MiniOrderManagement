@@ -9,9 +9,10 @@ import pt.francisco.miniordermanagement.core.domain.booking.Booking;
 import pt.francisco.miniordermanagement.core.domain.booking.BookingTestData;
 import pt.francisco.miniordermanagement.core.domain.order.Order;
 import pt.francisco.miniordermanagement.core.domain.order.OrderTestData;
+import pt.francisco.miniordermanagement.crosscut.MiniOrderManagementLauncher;
 import pt.francisco.miniordermanagement.infrastructure.adapter.out.persistence.jpa.order.OrderRepositoryAdapter;
 
-@SpringBootTest
+@SpringBootTest(classes = MiniOrderManagementLauncher.class)
 class BookingJpaRepositoryIntegrationTest {
 	@Autowired
 	private BookingRepositoryAdapter bookingRepositoryAdapter;

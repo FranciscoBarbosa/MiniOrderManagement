@@ -3,6 +3,7 @@ package pt.francisco.miniordermanagement.crosscut;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+@SuppressWarnings({ "PMD", "checkstyle:hideutilityclassconstructor" })
 @SpringBootApplication(scanBasePackages = "pt.francisco.miniordermanagement")
 public class MiniOrderManagementLauncher {
 

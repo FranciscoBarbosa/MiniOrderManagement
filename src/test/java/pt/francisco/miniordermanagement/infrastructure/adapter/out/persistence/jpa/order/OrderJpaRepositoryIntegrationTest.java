@@ -6,8 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.jdbc.core.JdbcTemplate;
 import pt.francisco.miniordermanagement.core.domain.order.OrderTestData;
+import pt.francisco.miniordermanagement.crosscut.MiniOrderManagementLauncher;
 
-@SpringBootTest
+@SpringBootTest(classes = MiniOrderManagementLauncher.class)
 class OrderJpaRepositoryIntegrationTest {
 	@Autowired
 	private JdbcTemplate jdbcTemplate;

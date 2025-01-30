@@ -26,7 +26,7 @@ public class OrderUsecaseConfiguration {
 	}
 
 	@Bean
-	public OrderService orderService(OrderRepository orderRepository) {
+	public OrderService orderService(final OrderRepository orderRepository) {
 		return new OrderService(orderRepository);
 	}
 

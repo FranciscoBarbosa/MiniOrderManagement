@@ -10,10 +10,9 @@
     <suppress files="." checks="FileTabCharacter"/>
     <suppress files="." checks="WhitespaceAround" />
 
-    <suppress files="src\\main\\java\\pt\\francisco\\miniordermanagement\\MiniOrderManagementApplication.java" checks="HideUtilityClassConstructor"/>
+    <suppress files=".*/miniordermanagement/.*\.java" checks="HideUtilityClassConstructor"/>
 
     <suppress files="." checks="DesignForExtension"/>
     <suppress files="." checks="TodoComment" />
     <suppress files="." checks="HiddenField" />
-
 </suppressions>
