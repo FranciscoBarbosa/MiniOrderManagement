@@ -12,7 +12,7 @@ import pt.francisco.miniordermanagement.core.application.port.in.order.dto.Order
 @RabbitListener(queues = "${rabbitmq.order.queue}")
 @RequiredArgsConstructor
 @Slf4j
-public class OrderReceiver {
+public class OrderRabbitReceiver {
 	private final CreateOrderUseCase createOrderUseCase;
 
 	@RabbitHandler

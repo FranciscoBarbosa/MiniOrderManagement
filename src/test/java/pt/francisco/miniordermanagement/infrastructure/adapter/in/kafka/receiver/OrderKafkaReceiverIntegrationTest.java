@@ -1,19 +1,17 @@
-package pt.francisco.miniordermanagement.infrastructure.adapter.in.amqp.receiver;
+package pt.francisco.miniordermanagement.infrastructure.adapter.in.kafka.receiver;
 
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.springframework.amqp.core.AmqpTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.context.annotation.ComponentScan;
-import org.testcontainers.junit.jupiter.Testcontainers;
+import org.springframework.kafka.core.KafkaTemplate;
 import pt.francisco.miniordermanagement.core.application.port.in.order.dto.OrderRequestDto;
 import pt.francisco.miniordermanagement.core.application.port.in.order.dto.OrderlineRequestDto;
 import pt.francisco.miniordermanagement.core.domain.order.Order;
 import pt.francisco.miniordermanagement.core.domain.order.OrderRepository;
 import pt.francisco.miniordermanagement.crosscut.MiniOrderManagementLauncher;
-import pt.francisco.miniordermanagement.testcontainers.rabbitmq.RabbitmqContainerSetup;
+import pt.francisco.miniordermanagement.testcontainers.kafka.KafkaContainerSetup;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -23,13 +21,11 @@ import java.util.concurrent.TimeUnit;
 import static org.awaitility.Awaitility.await;
 
 @SpringBootTest(classes = MiniOrderManagementLauncher.class)
-@ComponentScan(basePackages = "pt.francisco.miniordermanagement")
-@Testcontainers
-class OrderReceiverIntegrationTest extends RabbitmqContainerSetup { // TODO: add PGSQL instead of h2
-	@Value("${rabbitmq.order.queue}")
-	private String queueName;
+class OrderKafkaReceiverIntegrationTest extends KafkaContainerSetup {
+	@Value("${kafka.order.topic}")
+	private String topicName;
 	@Autowired
-	private AmqpTemplate amqpTemplate;
+	private KafkaTemplate kafkaTemplate;
 	@Autowired
 	private OrderRepository orderRepository;
 
@@ -45,7 +41,7 @@ class OrderReceiverIntegrationTest extends RabbitmqContainerSetup { // TODO: add
 				.orderDate(LocalDateTime.of(12, 11, 12, 1, 2, 50))
 				.build();
 
-		amqpTemplate.convertAndSend(queueName, orderRequestDto);
+		kafkaTemplate.send(topicName, orderRequestDto);
 
 		await().atMost(10, TimeUnit.SECONDS).until(() -> {
 			var orderEntity = orderRepository.findOrderByOrderId(orderId).orElse(null);

@@ -1,0 +1,19 @@
+spring:
+        datasource.url: jdbc:h2:mem:testdb
+        jpa.hibernate.ddl-auto: create-drop
+        rabbitmq:
+                host: localhost
+                port: 5672
+                username: guest
+                password: guest
+        kafka:
+                bootstrap-servers: localhost:9092
+                consumer.group-id: myGroup
+kafka:
+        order:
+                topic: pt.francisco.miniordermanagement.order.v1
+
+rabbitmq:
+        order:
+                exchange: order-exchange
+                queue: order-queue
